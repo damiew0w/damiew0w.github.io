@@ -59,7 +59,7 @@ Functions are reusable blocks of code that perform a specific task. You â€œcallâ
 | Term              | Definition                                                                                             |
 | ----------------- | ------------------------------------------------------------------------------------------------------ |
 | **Function Call** | Code that runs the function and gives it any necessary inputs (arguments).                             |
-| **Arguments**     | The actual values you pass into the function when you call it (e.g., `500` for x in `createPlatform`). |
+| **Arguments**     | The actual values you pass into the function when you call it (e.g., `500` for x in `createPlatform`). |                                     
 | **Parameters**    | Placeholders in the function definition that represent the values needed to perform the task.          |
 
 </div>
