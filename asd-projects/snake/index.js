@@ -10,14 +10,82 @@ var scoreElement = $("#score");
 var highScoreElement = $("#highScore");
 
 // Game Variables
+var apple = {};
 var score = 0; // variable to keep track of the score
 var started = false; // variable to keep track of whether the game has started
 
 // TODO 4, Part 1: Create the apple variable
-var apple = {};
+const apple = {};
+8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // TODO 5, Part 1: Create the snake variable
-var snake = {};
+const snake = {};
 // Constant Variables
 var ROWS = 20;
 var COLUMNS = 20;
@@ -86,7 +154,8 @@ function update() {
 function checkForNewDirection(event) {
   /* 
   TODO 7: Update snake.head.direction based on the value of activeKey.
-  
+
+
   BONUS: Only allow direction changes to take place if the new direction is
   perpendicular to the current direction
   */
@@ -113,7 +182,7 @@ function moveSnake() {
     stored in the Array snake.body and each part knows its current 
     column/row properties. 
   */
-  for (var i = snake.body.length - 1; i > 0; i--) {
+  for (var i = snake.body.length - 1; i >= 1; i--) {
     var currentSnakeSquare = snake.body[i];
     var snakeSquareInFront = snake.body[i - 1];
 
@@ -145,11 +214,11 @@ function moveSnake() {
 }
 
 // TODO 9: Create a new helper function
-function moveBodyAToBodyB(bodyA, bodyB) {
-  bodyA.row = bodyB.row;
-  bodyA.column = bodyB.column;
-  bodyA.direction = bodyB.direction;
-}
+console.log("Moving body A to body B...");
+setTimeout(() => {
+  moveBodyAToBodyB(snake.body[1], snake.head);
+  repositionSquare(snake.body[1]);
+}, 2_000);
 
 function hasHitWall() {
   /* 
@@ -158,15 +227,18 @@ function hasHitWall() {
     
     HINT: What will the row and column of the snake's head be if this were the case?
   */
-  if (snake.head.row < 0 || snake.head.row >= ROWS) {
+  if (snake.head.row < 0) {
     return true;
   }
+if (snake.head.row > ROWS){
+  return true;
+}
 
-  if (snake.head.column < 0 || snake.head.column >= COLUMNS) {
+  if (snake.head.column < 0) {
     return true;
   }
-
-  return false;
+if (snake.head.column > COLUMNS) {
+  return true;
 }
 
 function hasCollidedWithApple() {
@@ -176,10 +248,20 @@ function hasCollidedWithApple() {
     
     HINT: Both the apple and the snake's head are aware of their own row and column
   */
-  if (snake.head.row === apple.row && snake.head.column === apple.column) {
-    return true;
+ if (nake.tail.direction === "left") {
+  row = snake.tail.row;
+  column = snake.tail.column + 1;}
+  if (snake.taildirection === "right") {
+    row = snake.tail.column - 1;
   }
-
+if (snake.tail.direction === "up"){ 
+  row = snake.tail.row + 1;
+  column = snake.tail.column;}
+if (snake.tail.direction === "down"){
+  row = snake.tail.row - 1;
+  column = snake.tail.column;
+ }
+}
   return false;
 }
 
@@ -291,7 +373,7 @@ function makeSnakeSquare(row, column) {
 function handleKeyDown(event) {
   // TODO 7: make the handleKeyDown function register which key is pressed
   activeKey = event.which;
-
+  console.log(activeKey);
   // If a valid direction key is pressed, start the game
   if (
     event.which === KEY.LEFT ||
@@ -336,12 +418,10 @@ function getRandomAvailablePosition() {
       spaceIsAvailable to false so that a new position is generated.
     */
     for (var i = 0; i < snake.body.length; i++) {
+      var piece = snake.body[i];
       if (
-        randomPosition.row === snake.body[i].row &&
-        randomPosition.column === snake.body[i].column
-      ) {
-        spaceIsAvailable = false;
-      }
+        randomPosition.column === piece.column && randomPosition.row === piece.row){
+          spaceIsAvailable = false;
     }
   }
 
@@ -359,4 +439,5 @@ function calculateHighScore() {
   }
 
   return highScore;
-}
+   }
+  }
